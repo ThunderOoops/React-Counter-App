@@ -1,12 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Counter App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Counter App</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container { text-align: center; }
+    h1 { color: #e0e0e0; font-size: 2rem; margin-bottom: 30px; letter-spacing: 1px; }
+    .card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 50px 70px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    }
+    .count-label { color: #aaa; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 8px; }
+    .count-value { font-size: 7rem; font-weight: 800; color: #00d4ff; text-shadow: 0 0 30px rgba(0,212,255,0.5); margin-bottom: 40px; }
+    .buttons { display: flex; gap: 16px; justify-content: center; }
+    .btn { padding: 13px 30px; font-size: 1rem; font-weight: 700; border: none; border-radius: 12px; cursor: pointer; transition: transform 0.15s, opacity 0.15s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: scale(0.96); }
+    .increment { background: #00c897; color: #fff; }
+    .decrement { background: #ff4d6d; color: #fff; }
+    .reset     { background: #7b61ff; color: #fff; }
+    .note { margin-top: 20px; color: #ff9f43; font-size: 0.85rem; min-height: 22px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Counter Application</h1>
+    <div class="card">
+      <p class="count-label">Count</p>
+      <h2 class="count-value" id="count">0</h2>
+      <div class="buttons">
+        <button class="btn increment" onclick="increment()">Increment</button>
+        <button class="btn decrement" onclick="decrement()">Decrement</button>
+        <button class="btn reset"     onclick="reset()">Reset</button>
+      </div>
+      <p class="note" id="note"></p>
+    </div>
+  </div>
+  <script>
+    let count = 0;
+    const countEl = document.getElementById('count');
+    const noteEl  = document.getElementById('note');
+
+    function update() {
+      countEl.textContent = count;
+      noteEl.textContent  = count === 0 ? '⚠️ Count cannot go below 0' : '';
+    }
+    function increment() { count++; update(); }
+    function decrement() { if (count > 0) count--; update(); }
+    function reset()     { count = 0; update(); }
+  </script>
+</body>
 </html>
